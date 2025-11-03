@@ -1,9 +1,9 @@
 /.vs
-/GlucoseMonitoringApp.Server/bin/
-/GlucoseMonitoringApp.Server/obj/
-/Infrastructure/bin/
-/Infrastructure/obj/
-/Domain/bin/
-/Domain/obj/
-/Application/bin/
-/Application/obj/
+GlucoseMonitoringApp.Server/bin/
+GlucoseMonitoringApp.Server/obj/
+Infrastructure/bin/
+Infrastructure/obj/
+Domain/bin/
+Domain/obj/
+Application/bin/
+Application/obj/
