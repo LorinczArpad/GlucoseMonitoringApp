@@ -1,0 +1,15 @@
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\bin\Debug\net9.0\Infrastructure.deps.json
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\bin\Debug\net9.0\Infrastructure.runtimeconfig.json
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\bin\Debug\net9.0\Infrastructure.dll
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\bin\Debug\net9.0\Infrastructure.pdb
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.AssemblyInfo.cs
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.sourcelink.json
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.dll
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\refint\Infrastructure.dll
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.pdb
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\Infrastructure.genruntimeconfig.cache
+C:\Users\lorincza\source\repos\GlucoseMonitoringApp\GlucoseMonitoringApp\Infrastructure\obj\Debug\net9.0\ref\Infrastructure.dll
