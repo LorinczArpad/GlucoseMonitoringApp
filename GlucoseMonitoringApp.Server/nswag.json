@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "Server.csproj",
+      "project": "GlucoseMonitoringApp.Server.csproj",
       "msBuildProjectExtensionsPath": null,
       "configuration": null,
       "runtime": null,
@@ -48,7 +48,7 @@
       "allowNullableBodyParameters": true,
       "output": "wwwroot/api/specification.json",
       "outputType": "OpenApi3",
-      "assemblyPaths": [],
+      "assemblyPaths":  [],
       "assemblyConfig": null,
       "referencePaths": [],
       "useNuGetCache": false

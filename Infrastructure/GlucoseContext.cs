@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using Domain;
+using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,10 @@ namespace Infrastructure
 {
     public class GlucoseContext : DbContext
     {
+        public DbSet<User> Users
+        {
+            get; set;
+        }
         public GlucoseContext(DbContextOptions<GlucoseContext> options)
        : base(options)
         {
@@ -25,8 +30,8 @@ namespace Infrastructure
         {
             //// Gyereknek van egy edzője egy edzőnek több gyereke is van
             //// Törlésnél a gyerek CoachId-ja null lesz
-            //modelBuilder.Entity<User>()
-            //        .HasQueryFilter(x => x.Deleted == false)
+            modelBuilder.Entity<User>()
+                    .HasQueryFilter(x => x.Deleted == false);
             //        .HasMany(mc => mc.Students)
             //        .WithOne(s => s.Coach)
             //        .HasForeignKey(s => s.CoachId)
