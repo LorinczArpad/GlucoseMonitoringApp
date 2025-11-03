@@ -1,4 +1,9 @@
 /.vs
-/Application/bin/Debug/net9.0
-/Domain/bin/Debug/net9.0
-/GlucoseMonitoringApp.Server/bin/Debug/net9.0
+/GlucoseMonitoringApp.Server/bin/
+/GlucoseMonitoringApp.Server/obj/
+/Infrastructure/bin/
+/Infrastructure/obj/
+/Domain/bin/
+/Domain/obj/
+/Application/bin/
+/Application/obj/
