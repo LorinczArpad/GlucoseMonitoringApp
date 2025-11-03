@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "1Lpkm+v/GpM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lorincza\\source\\repos\\GlucoseMonitoringApp\\GlucoseMonitoringApp\\GlucoseMonitoringApp.Server\\GlucoseMonitoringApp.Server.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lorincza\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.9\\microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "C:\\Users\\lorincza\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\9.0.10\\microsoft.aspnetcore.spaproxy.9.0.10.nupkg.sha512",
+    "C:\\Users\\lorincza\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
