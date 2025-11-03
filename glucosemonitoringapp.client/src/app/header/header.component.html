@@ -1,0 +1,28 @@
+<p-menubar [model]="menuItems" class="bg-transparent border-none p-0">
+  
+  <!-- Start Template (Logo or Left Section if needed) -->
+  <ng-template pTemplate="start">
+   AAAA
+  </ng-template>
+
+  <!-- Menu Items -->
+  <ng-template pTemplate="menuitem" let-item>
+    <a 
+      [routerLink]="item.routerLink" 
+      class="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors font-medium flex items-center space-x-1"
+    >
+      <i *ngIf="item.icon" class="pi {{item.icon}}"></i>
+      <span>{{ item.label }}</span>
+    </a>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <p-button
+      [label]="isLoggedIn ? 'Kijelentkezés' : 'Belépés'"
+      [icon]="isLoggedIn ? 'pi pi-sign-out' : 'pi pi-sign-in'"
+      [severity]="isLoggedIn ? 'secondary' : 'primary'"
+      styleClass="p-button-sm font-semibold"
+      [routerLink]="isLoggedIn ? null : '/login'"
+      (onClick)="toggleLogin()"
+    ></p-button>
+  </ng-template>
+</p-menubar>

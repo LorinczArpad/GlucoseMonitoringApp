@@ -5,33 +5,35 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //PrimeNG
-import { FormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
-import { ButtonModule } from 'primeng/button';
-import { CheckboxModule } from 'primeng/checkbox';
+import { CommonModule } from '@angular/common';
 
+import Aura from '@primeuix/themes/aura';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-  
+
   ],
   imports: [
+    RouterModule,
+    CommonModule,
     BrowserModule,
-     HttpClientModule,
+    HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
-    CheckboxModule
+    HeaderComponent
   ],
   providers: [ 
     provideAnimationsAsync(),
-        providePrimeNG()],
+        providePrimeNG({
+            theme: {
+                preset: Aura
+            }
+        })],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

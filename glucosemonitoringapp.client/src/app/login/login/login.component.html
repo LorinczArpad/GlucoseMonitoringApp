@@ -1,0 +1,60 @@
+<div class="min-h-screen flex items-center justify-center bg-surface-100 p-4">
+  <p-card header="Doctor Login" class="w-full max-w-md shadow-2xl rounded-lg">
+    <div class="p-fluid">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+
+        <div class="flex flex-col gap-2">
+          <label for="username" class="font-semibold text-color-secondary">Username</label>
+          <input 
+            id="username" 
+            type="text" 
+            pInputText 
+            formControlName="username" 
+            placeholder="Doctor ID or Email"
+            [ngClass]="{'ng-invalid ng-dirty': f['username'].invalid && f['username'].touched}"
+          />
+          <small 
+            *ngIf="f['username'].invalid && f['username'].touched" 
+            class="text-red-500"
+          >
+            Username is required.
+          </small>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="password" class="font-semibold text-color-secondary">Password</label>
+          <p-password 
+            id="password" 
+            formControlName="password" 
+            [toggleMask]="true" 
+            [feedback]="false" 
+            placeholder="Password"
+            [styleClass]="(f['password'].invalid && f['password'].touched) ? 'ng-invalid ng-dirty w-full' : 'w-full'"
+          ></p-password>
+          <small 
+            *ngIf="f['password'].invalid && f['password'].touched" 
+            class="text-red-500"
+          >
+            Password is required.
+          </small>
+        </div>
+
+        <p-button 
+          label="Login" 
+          type="submit" 
+          icon="pi pi-sign-in" 
+          [disabled]="loginForm.invalid" 
+          styleClass="mt-4"
+          class="w-full p-button-primary"
+        ></p-button>
+
+        <p-button 
+          label="Forgot xs Password?" 
+          link="true"                         
+          type="button" 
+          (onClick)="onForgotPassword()"
+          class="w-full text-center"          ></p-button>
+      </form>
+    </div>
+  </p-card>
+</div>

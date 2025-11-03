@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 interface WeatherForecast {
   date: string;
   temperatureC: number;
