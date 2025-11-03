@@ -37,3 +37,11 @@ Application/obj/
 /Domain/obj/Debug/net9.0/Domain.AssemblyInfoInputs.cache
 /Application/obj/Debug/net9.0/Application.AssemblyInfo.cs
 /Application/obj/Debug/net9.0/Application.AssemblyInfoInputs.cache
+/Infrastructure/Migrations
+/Application/obj/Debug/net9.0/Application.assets.cache
+/Application/obj/Application.csproj.nuget.dgspec.json
+/Application/obj/Application.csproj.nuget.g.targets
+/Application/obj/Application.csproj.nuget.g.props
+/Application/obj/project.assets.json
+/Application/obj/project.nuget.cache
+/GlucoseMonitoringApp.Server/obj/Debug/net9.0/GlucoseMonitoringApp.Server.GeneratedMSBuildEditorConfig.editorconfig
