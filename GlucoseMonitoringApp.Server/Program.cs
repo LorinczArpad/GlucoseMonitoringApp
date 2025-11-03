@@ -1,5 +1,6 @@
 
 
+using Application.Extension;
 using Domain;
 using Domain.Common.Enums;
 using GlucoseMonitoringApp.Server.Authentication;
@@ -28,7 +29,7 @@ builder.Services.AddCors(options =>
         builder =>
         {
 #if DEBUG
-            builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+            builder.WithOrigins("https://localhost:50386").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
 #else
             builder.WithOrigins("https://vnyer-test.bartokit.hu", "https://vnyer.prod1.bartokit.hu", "https://danubius-vnyer.bartokitsoftware.hu").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
 #endif
@@ -64,7 +65,7 @@ builder.Services.AddDbContext<GlucoseContext>(options =>
 
 //Register Services
 builder.Services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
-
+builder.Services.AddServices();
 builder.Services.AddOpenApiDocument(configure =>
 {
     configure.Title = "Glucose.Backend";
@@ -83,6 +84,7 @@ builder.Services.AddOpenApiDocument(configure =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
 app.UseOpenApi(); // Serve the OpenAPI/Swagger document
 app.UseSwaggerUi(); // Serve the Swagger UI
 app.UseCors("AllowList");
@@ -96,7 +98,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<GlucoseContext>();
-        
+    ;
         context.Database.Migrate();
         if (!context.Users.Any())
         {

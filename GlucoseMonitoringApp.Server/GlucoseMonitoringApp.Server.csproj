@@ -15,10 +15,15 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>9.*-*</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="NSwag.AspNetCore" Version="14.6.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\glucosemonitoringapp.client\glucosemonitoringapp.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
@@ -28,9 +33,16 @@
   <ItemGroup>
     <Folder Include="wwwroot\api\" />
   </ItemGroup>
-	<!-- Run this in project to generate Ts client:
-	nswag run nswag.json /variables:Configuration=Debug
-	-->
+	<!-- 
+Run this in the project to generate TypeScript client:
+    nswag run nswag.json /variables:Configuration=Debug
+
+This is for creating the initial EF Core migration:
+    dotnet ef migrations add InitialCreate dashdashstartup-project ../GlucoseMonitoringApp.Server dashdashproject ../Infrastructure
+
+Then update the database:
+    dotnet ef database update dashdashstartup-project ../GlucoseMonitoringApp.Server dashdashproject ../Infrastructure
+-->
 	
 
 </Project>
