@@ -1,0 +1,65 @@
+<div class="p-4 max-w-7xl mx-auto">
+
+  <h2 class="text-xl font-bold mb-4">Patient Selector</h2>
+
+  <!-- Table -->
+  <p-table 
+    [value]="patients" 
+    selectionMode="single" 
+    [(selection)]="selectedPatient"
+    dataKey="id"
+  
+    [paginator]="true" 
+    [rows]="10" 
+    [rowsPerPageOptions]="[5,10,20]" 
+    class="shadow-sm rounded-md "
+  >
+    
+    <!-- Table Columns -->
+    <ng-template pTemplate="header">
+      <tr class="bg-gray-100">
+        <th pSelectableRowCheckbox></th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Mother's Name</th>
+        <th>Birth Date</th>
+        <th>Insulin Pump</th>
+        <th>CGM Sensor</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-patient>
+      <tr [pSelectableRow]="patient" class="hover:bg-gray-50">
+        <td pSelectableRowCheckbox></td>
+        <td>{{ patient.firstName }}</td>
+        <td>{{ patient.lastName }}</td>
+        <td>{{ patient.mothersName }}</td>
+        <td>{{ patient.birthDate | date:'mediumDate' }}</td>
+        <td>{{ patient.insulinPump }}</td>
+        <td>{{ patient.cgmSensor }}</td>
+      </tr>
+    </ng-template>
+
+    <!-- Footer (optional) -->
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="7">
+          <div class="flex justify-between items-center">
+            <span>Total Patients: {{ patients.length }}</span>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+  <!-- Selected Patient Info -->
+  <div *ngIf="selectedPatient" class="mt-4 p-4 border rounded-md bg-gray-800">
+    <h3 class="font-semibold">Selected Patient:</h3>
+    <p>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }} (Mother: {{ selectedPatient.mothersName }})</p>
+    <p>Birth Date: {{ selectedPatient.birthDate | date:'mediumDate' }}</p>
+    <p>Insulin Pump: {{ selectedPatient.insulinPump }}</p>
+    <p>CGM Sensor: {{ selectedPatient.cgmSensor }}</p>
+  </div>
+
+</div>

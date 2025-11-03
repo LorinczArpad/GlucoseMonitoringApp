@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GlucoseMonitoringApp.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ca98cbc052157b4055bfb4a16733385d94b205f")]
 [assembly: System.Reflection.AssemblyProductAttribute("GlucoseMonitoringApp.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GlucoseMonitoringApp.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

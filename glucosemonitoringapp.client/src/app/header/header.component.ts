@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Páciensek', // 'Patients' in Hungarian
         icon: 'pi pi-users',
-        routerLink: '/patients',
+        routerLink: '/patient-selector',
         // Optional: Only show if logged in
         // visible: this.isLoggedIn 
       }
