@@ -1,2 +1,4 @@
 /.vs
 /Application/bin/Debug/net9.0
+/Domain/bin/Debug/net9.0
+/GlucoseMonitoringApp.Server/bin/Debug/net9.0
