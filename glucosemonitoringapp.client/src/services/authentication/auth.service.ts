@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { isPlatformBrowser } from '@angular/common';
-import { AuthenticationClient } from '../httpClient/httpClient';
+import { AuthenticationClient, LoginResponse } from '../httpClient/httpClient';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {}
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<LoginResponse> {
     return this.authClient.login(username, password);
   }
   authRole(token: string) {
@@ -27,6 +27,7 @@ export class AuthService {
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
+        localStorage.removeItem('user');
       this.router.navigate(['login']);
     }
   }

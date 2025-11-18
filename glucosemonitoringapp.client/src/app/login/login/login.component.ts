@@ -8,7 +8,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,7 @@ import { ToastModule } from 'primeng/toast';
     PasswordModule, 
     ButtonModule,
     FormsModule,
-    ToastModule
+ 
   ],
   providers:[MessageService],
   templateUrl: './login.component.html',
@@ -39,25 +38,31 @@ export class LoginComponent {
 
  onSubmit(): void {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value; // get values from form
-      console.log('Login credentials:', this.loginForm.value);
-
-      this.authService.login(username, password).subscribe((response) => {
-        if (isPlatformBrowser(this.platformId)) {
-          if (response !== "Invalid username or password.") {
-            localStorage.removeItem('token');
-            localStorage.setItem('token', response);
-
-            this.messageService.clear();
-            this.router.navigate(['patient-selector']);
-          } else {
-            console.log('Hiba')
-            this.messageService.add({
-              severity: 'warn',
-              summary: 'Hiba',
-              detail: 'Hibás jelszó vagy felhasználónév!',
-            });
+      const { username, password } = this.loginForm.value; 
+     
+    this.authService.login(username, password).subscribe({
+        next: (response: any) => {
+          if (isPlatformBrowser(this.platformId)) {
+            if (response !== "Invalid username or password.") {
+              localStorage.setItem('token', JSON.stringify(response));
+              this.messageService.clear();
+              this.router.navigate(['patient-selector']);
+            } else {
+              this.messageService.add({
+                severity: 'warn',
+                summary: 'Hiba',
+                detail: 'Hibás jelszó vagy felhasználónév!',
+              });
+            }
           }
+        },
+        error: (err) => {
+          console.error('Login failed:', err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Login request failed.',
+          });
         }
       });
     } else {

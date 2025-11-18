@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,13 @@ import { MenuItem } from 'primeng/api';
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false; // Initial state: logged out
   menuItems: MenuItem[] = [];
+/**
+ *
+ */
+constructor(private authservice:AuthService) {
+  
 
+}
   ngOnInit() {
     this.updateMenuItems();
     // Simulate checking session state (e.g., from a service)

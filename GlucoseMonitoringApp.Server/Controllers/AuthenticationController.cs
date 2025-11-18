@@ -1,6 +1,9 @@
 ﻿using Application.Services.Users.Application.User.Services;
+using Domain;
 using GlucoseMonitoringApp.Server.Authentication;
+using GlucoseMonitoringApp.Server.Responses;
 using Microsoft.AspNetCore.Mvc;
+using YamlDotNet.Core.Tokens;
 
 namespace GlucoseMonitoringApp.Server.Controllers
 {
@@ -19,24 +22,42 @@ namespace GlucoseMonitoringApp.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<string> LoginAsync(string email, string password)
+        public async Task<LoginResponse> LoginAsync(string email, string password)
         {
+            
             try
             {
                 var user = await _userService.AuthenticateUser(email, password);
+                
                 if (user is not null)
                 {
                     var token = _jwtAuthManager.GenerateToken(user);
-                    return token;
+                    return new LoginResponse
+                    {
+                        Token = token,
+                        User = user
+                    }
+                    ;
                 }
             }
             catch
             {
-                return "Invalid username or password.";
+                return new LoginResponse
+                {
+                    Token = "Invalid username or password.",
+                    User = null
+                }
+           ;
+                ;
             }
-    
 
-            return "Invalid username or password.";
+
+            return new LoginResponse
+            {
+                Token = "Invalid username or password.",
+                User = null
+            }
+      ;
         }
 
         [HttpPost("AuthRole")]

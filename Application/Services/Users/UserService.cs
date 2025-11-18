@@ -63,6 +63,7 @@ namespace Application.Services.Users
                 //    return (await _dbContext.Users.Where(x => x.Email == email).FirstOrDefaultAsync()).MapToDTO();
                 //}
                 var user = await _dbContext.Users.Where(x => x.Email == email && HashPassword(password) == x.PasswordHash).FirstOrDefaultAsync();
+                
                 if (user == null)
                     return null;
                 return user.MapToDTO();

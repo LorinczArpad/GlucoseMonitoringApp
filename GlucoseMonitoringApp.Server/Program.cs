@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
         {
 #if DEBUG
             builder.WithOrigins("https://localhost:50386").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+            builder.WithOrigins("http://localhost:50386").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
 #else
             builder.WithOrigins("https://vnyer-test.bartokit.hu", "https://vnyer.prod1.bartokit.hu", "https://danubius-vnyer.bartokitsoftware.hu").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
 #endif

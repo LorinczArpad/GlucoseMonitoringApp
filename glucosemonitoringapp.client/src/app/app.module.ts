@@ -22,8 +22,9 @@ import { PatientSelectorComponent } from './patient/patient-selector/patient-sel
 import { JwtInterceptorService } from '../services/interceptors/jwt-interceptor.service';
 import { API_BASE_URL } from '../services/httpClient/httpClient';
 import { environment } from '../enviroments/enviroment';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { ToastModule } from 'primeng/toast';
 
   ],
   imports: [
+     BrowserAnimationsModule,
     RouterModule,
     CommonModule,
     BrowserModule,
@@ -41,7 +43,8 @@ import { ToastModule } from 'primeng/toast';
     HeaderComponent,
 ToastModule
   ],
-  providers: [ 
+  providers: [
+    MessageService, 
     provideAnimations(),
         providePrimeNG({
             theme: {

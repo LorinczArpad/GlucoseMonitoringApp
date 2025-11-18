@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SpaRoot>..\glucosemonitoringapp.client</SpaRoot>
-    <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+    <SpaProxyLaunchCommand>ng serve</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:50386</SpaProxyServerUrl>
   </PropertyGroup>
 
