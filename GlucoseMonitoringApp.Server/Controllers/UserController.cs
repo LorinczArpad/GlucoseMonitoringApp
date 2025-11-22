@@ -1,5 +1,6 @@
-﻿using Application.Services.Users.Application.User.Services;
-using Domain.DTOs;
+﻿using Application.DTOs;
+using Application.Services.Users.Application.User.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

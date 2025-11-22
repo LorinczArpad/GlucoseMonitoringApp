@@ -1,6 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Common.Enums;
-using Domain.DTOs;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,31 +19,6 @@ namespace Domain
         public DateTime LastLogin { get; set; }
 
 
-        public UserDTO MapToDTO()
-        {
-            return new UserDTO
-            {
-                Id = Id,
-                Name = Name,
-                Email = Email,
-                Phone = Phone,
-                PasswordHash = PasswordHash,
-                UserType = UserType,
-                LastLogin = LastLogin,
-            };
-        }
-        public UserDTO MapToDTOWithoutHash()
-        {
-            return new UserDTO
-            {
-                Id = Id,
-                Name = Name,
-                Email = Email,
-                Phone = Phone,
-                PasswordHash = "",
-                UserType = UserType,
-                LastLogin = LastLogin,
-            };
-        }
+      
     }
 }

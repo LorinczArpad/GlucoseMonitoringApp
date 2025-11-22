@@ -104,7 +104,7 @@ using (var scope = app.Services.CreateScope())
         if (!context.Users.Any())
         {
             context.Users.AddRange(
-                new User { Name = "Alice", Email = "alice@example.com", Phone = "123456789", PasswordHash = "hashedpassword1", UserType = UserType.Superadmin, LastLogin = DateTime.UtcNow },
+                new User { Name = "Alice", Email = "string", Phone = "123456789", PasswordHash = "hashedpassword1", UserType = UserType.Superadmin, LastLogin = DateTime.UtcNow },
                 new User { Name = "Bob", Email = "bob@example.com", Phone = "987654321", PasswordHash = "hashedpassword2", UserType = UserType.Doctor, LastLogin = DateTime.UtcNow },
                 new User { Name = "Charlie", Email = "charlie@example.com", Phone = "555555555", PasswordHash = "hashedpassword3", UserType = UserType.Doctor, LastLogin = DateTime.UtcNow }
             );

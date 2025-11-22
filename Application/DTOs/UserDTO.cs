@@ -1,11 +1,12 @@
-﻿using Domain.Common.Enums;
+﻿using Domain;
+using Domain.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.DTOs
+namespace Application.DTOs
 {
     public class UserDTO
     {
@@ -45,6 +46,34 @@ namespace Domain.DTOs
                 };
             }
 
+        }
+
+
+        public static UserDTO MapToDTO(User entity)
+        {
+            return new UserDTO
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Email = entity.Email,
+                Phone = entity.Phone,
+                PasswordHash = entity.PasswordHash,
+                UserType = entity.UserType,
+                LastLogin = entity.LastLogin,
+            };
+        }
+        public static UserDTO MapToDTOWithoutHash(User entity)
+        {
+            return new UserDTO
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Email = entity.Email,
+                Phone = entity.Phone,
+                PasswordHash = "",
+                UserType = entity.UserType,
+                LastLogin = entity.LastLogin,
+            };
         }
     }
 }

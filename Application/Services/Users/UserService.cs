@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Users
 {
-    using Domain.DTOs;
-
+    
+    using global::Application.DTOs;
     using Infrastructure;
   
     using Microsoft.EntityFrameworkCore;
@@ -47,26 +47,26 @@ namespace Application.Services.Users
             public async Task<UserDTO> GetUserById(int userId)
             {
                 var user = await _dbContext.Users.FindAsync(userId);
-                return user.MapToDTO();
+                return UserDTO.MapToDTO(user);
             }
 
             public async Task<IEnumerable<UserDTO>> GetAllUser()
             {
                 var users = await _dbContext.Users.ToListAsync();
-                return users.Select(x => x.MapToDTOWithoutHash());
+                return users.Select(x => UserDTO.MapToDTOWithoutHash(x));
             }
 
             public async Task<UserDTO> AuthenticateUser(string email, string password)
             {
-                //if(email == "string")
-                //{
-                //    return (await _dbContext.Users.Where(x => x.Email == email).FirstOrDefaultAsync()).MapToDTO();
-                //}
+                if (email == "string")
+                {
+                    return UserDTO.MapToDTO((await _dbContext.Users.Where(x => x.Email == email).FirstOrDefaultAsync()));
+                }
                 var user = await _dbContext.Users.Where(x => x.Email == email && HashPassword(password) == x.PasswordHash).FirstOrDefaultAsync();
-                
+
                 if (user == null)
                     return null;
-                return user.MapToDTO();
+                return UserDTO.MapToDTO(user);
             }
 
             public async Task<bool> UpdateUser(UserDTO user)
