@@ -1,4 +1,5 @@
-﻿using Application.Services.Users.Application.User.Services;
+﻿using Application.Services.Patients;
+using Application.Services.Users.Application.User.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Application.Extension
         {
   
             services.AddTransient<IUserService, UserService>();
-            
+            services.AddTransient<IPatientService, PatientService>();
         }
     }
 }

@@ -15,6 +15,10 @@ namespace Infrastructure
         {
             get; set;
         }
+        public DbSet<Patient> Patients
+        {
+            get; set;
+        }
         public GlucoseContext(DbContextOptions<GlucoseContext> options)
        : base(options)
         {
@@ -32,11 +36,13 @@ namespace Infrastructure
             //// Törlésnél a gyerek CoachId-ja null lesz
             modelBuilder.Entity<User>()
                     .HasQueryFilter(x => x.Deleted == false);
+            modelBuilder.Entity<Patient>()
+                    .HasQueryFilter(x => x.Deleted == false);
             //        .HasMany(mc => mc.Students)
             //        .WithOne(s => s.Coach)
             //        .HasForeignKey(s => s.CoachId)
             //        .OnDelete(DeleteBehavior.SetNull);
-           
+
 
         }
         public override int SaveChanges()

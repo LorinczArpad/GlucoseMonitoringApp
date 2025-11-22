@@ -108,8 +108,28 @@ using (var scope = app.Services.CreateScope())
                 new User { Name = "Bob", Email = "bob@example.com", Phone = "987654321", PasswordHash = "hashedpassword2", UserType = UserType.Doctor, LastLogin = DateTime.UtcNow },
                 new User { Name = "Charlie", Email = "charlie@example.com", Phone = "555555555", PasswordHash = "hashedpassword3", UserType = UserType.Doctor, LastLogin = DateTime.UtcNow }
             );
-            context.SaveChanges();
+        
         }
+        if (!context.Patients.Any())
+        {
+            var patients = new List<Patient>
+            {
+                new Patient { FirstName = "John", LastName = "Doe", MothersName = "Jane Doe", BirthDate = new DateTime(2007, 5, 12), InsulinPump = "Tandem", CgmSensor = "Dexcom G6", BodyWeight = 45, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Emma", LastName = "Smith", MothersName = "Laura Smith", BirthDate = new DateTime(2006, 3, 4), InsulinPump = "Omnipod", CgmSensor = "Libre 3", BodyWeight = 50, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Liam", LastName = "Johnson", MothersName = "Sarah Johnson", BirthDate = new DateTime(2008, 8, 21), InsulinPump = "Medtronic", CgmSensor = "Guardian 4", BodyWeight = 48, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Olivia", LastName = "Brown", MothersName = "Emily Brown", BirthDate = new DateTime(2009, 11, 9), InsulinPump = "Tandem", CgmSensor = "Dexcom G7", BodyWeight = 42, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Noah", LastName = "Williams", MothersName = "Anna Williams", BirthDate = new DateTime(2005, 1, 18), InsulinPump = "Omnipod", CgmSensor = "Libre 2", BodyWeight = 55, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Sophia", LastName = "Miller", MothersName = "Megan Miller", BirthDate = new DateTime(2007, 6, 30), InsulinPump = "Medtronic", CgmSensor = "Guardian 3", BodyWeight = 46, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "James", LastName = "Davis", MothersName = "Linda Davis", BirthDate = new DateTime(2006, 9, 27), InsulinPump = "Tandem", CgmSensor = "Dexcom G6", BodyWeight = 52, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Ava", LastName = "Garcia", MothersName = "Maria Garcia", BirthDate = new DateTime(2008, 12, 15), InsulinPump = "Omnipod", CgmSensor = "Libre 3", BodyWeight = 49, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Benjamin", LastName = "Rodriguez", MothersName = "Isabella Rodriguez", BirthDate = new DateTime(2005, 7, 5), InsulinPump = "Medtronic", CgmSensor = "Guardian 4", BodyWeight = 58, SocketUrl = "https://localhost:70", DoctorId = 1 },
+                new Patient { FirstName = "Mia", LastName = "Martinez", MothersName = "Carmen Martinez", BirthDate = new DateTime(2009, 2, 22), InsulinPump = "Tandem", CgmSensor = "Dexcom G7", BodyWeight = 41, SocketUrl = "https://localhost:70", DoctorId = 1 }
+            };
+
+            context.Patients.AddRange(patients);
+           
+        }
+        context.SaveChanges();
     }
     catch (Exception)
     {
