@@ -22,6 +22,7 @@
     "@angular/router": "^20.3.9",
     "@primeuix/themes": "^1.2.5",
     "@tailwindcss/postcss": "^4.1.16",
+    "chart.js": "^4.5.1",
     "jest-editor-support": "*",
     "primeng": "^20.3.0",
     "run-script-os": "*",

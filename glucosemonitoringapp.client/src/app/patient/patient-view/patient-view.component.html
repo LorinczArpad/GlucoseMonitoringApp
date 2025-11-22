@@ -1,1 +1,69 @@
-<p>{{ this.patientId }}</p>
+<div class="patient-view-container">
+  <div class="patient-info card">
+    <h2>Patient Details</h2>
+    <div class="info-grid">
+      <div class="info-item"><strong>ID:</strong> {{ patient.id }}</div>
+      <div class="info-item">
+        <strong>Name:</strong> {{ patient.firstName }} {{ patient.lastName }}
+      </div>
+      <div class="info-item"><strong>Email:</strong> {{ patient.email }}</div>
+      <div class="info-item">
+        <strong>Phone:</strong> {{ patient.phoneNumber }}
+      </div>
+      <div class="info-item">
+        <strong>Date of Birth:</strong>
+        {{ patient.birthDate | date : "mediumDate" }}
+      </div>
+    </div>
+  </div>
+
+  <div class="monitoring-control card">
+    <h3>Real-Time Glucose Monitoring</h3>
+    <p>
+      Status:
+      <span
+        [ngClass]="{
+          'status-monitoring': isMonitoring,
+          'status-stopped': !isMonitoring
+        }"
+      >
+        {{ isMonitoring ? "MONITORING (Fake Data)" : "STOPPED" }}
+      </span>
+    </p>
+
+    <div class="buttons">
+      <button
+        (click)="startMonitoring()"
+        [disabled]="isMonitoring"
+        class="btn btn-primary"
+      >
+        Start Monitoring
+      </button>
+
+      <button
+        (click)="stopMonitoring()"
+        [disabled]="!isMonitoring"
+        class="btn btn-danger"
+      >
+        Stop Monitoring
+      </button>
+    </div>
+  </div>
+
+  <div class="current-reading card">
+    <h3>Latest Reading:</h3>
+    <div *ngIf="latestReading !== null; else noReading" class="reading-content">
+      <div class="reading-value">{{ latestReading }} mg/dL</div>
+      <div class="reading-time">at {{ latestTime }}</div>
+    </div>
+    <ng-template #noReading>
+      <p class="text-muted">No active readings.</p>
+    </ng-template>
+  </div>
+
+  <div class="glucose-chart card">
+    <div style="height: 100%">
+      <canvas #glucoseChart></canvas>
+    </div>
+  </div>
+</div>
