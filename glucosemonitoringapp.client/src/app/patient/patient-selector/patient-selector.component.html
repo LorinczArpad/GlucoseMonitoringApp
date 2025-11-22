@@ -1,5 +1,41 @@
-<div class="p-4 max-w-7xl mx-auto">
-  <h2 class="text-xl font-bold mb-4">Patient Selector</h2>
+<div
+  class="p-6 md:p-8 max-w-7xl mx-auto bg-gray-900 shadow-2xl rounded-xl my-8 text-gray-200"
+>
+  <h2
+    class="text-3xl font-extrabold text-blue-400 mb-6 border-b border-gray-700 pb-2"
+  >
+    Patient Records Dashboard
+  </h2>
+
+  <div class="flex justify-start space-x-3 mb-6">
+    <p-button
+      (click)="openAddPatientDialog()"
+      icon="pi pi-plus"
+      label="Add New Patient"
+      styleClass="p-button-rounded p-button-sm"
+    >
+    </p-button>
+
+    <p-button
+      (click)="openEditPatientDialog(selectedPatient!)"
+      [disabled]="!selectedPatient"
+      icon="pi pi-pencil"
+      label="Edit"
+      severity="info"
+      styleClass="p-button-rounded p-button-sm"
+    >
+    </p-button>
+
+    <p-button
+      (click)="deletePatient(selectedPatient!)"
+      [disabled]="!selectedPatient"
+      icon="pi pi-trash"
+      label="Delete"
+      severity="danger"
+      styleClass="p-button-rounded p-button-sm"
+    >
+    </p-button>
+  </div>
 
   <!-- Table -->
   <p-table
@@ -12,30 +48,32 @@
     [rowsPerPageOptions]="[5, 10, 20]"
     [totalRecords]="totalCount"
     (onPage)="onPageChange($event)"
-    class="shadow-sm rounded-md"
+    class="shadow-xl rounded-lg overflow-hidden border border-gray-700 p-datatable-dark"
   >
-    <!-- Table Columns -->
     <ng-template pTemplate="header">
-      <tr class="bg-gray-100">
-        <th pSelectableRowCheckbox></th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Mother's Name</th>
-        <th>Birth Date</th>
-        <th>Insulin Pump</th>
-        <th>CGM Sensor</th>
+      <tr class="bg-blue-700 text-white uppercase text-sm">
+        <th style="width: 4rem" pSelectableRowCheckbox></th>
+        <th class="py-3 px-4">First Name</th>
+        <th class="py-3 px-4">Last Name</th>
+        <th class="py-3 px-4">Mother's Name</th>
+        <th class="py-3 px-4">Birth Date</th>
+        <th class="py-3 px-4">Insulin Pump</th>
+        <th class="py-3 px-4">CGM Sensor</th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-patient>
-      <tr [pSelectableRow]="patient" class="hover:bg-gray-50">
-        <td pSelectableRowCheckbox></td>
-        <td>{{ patient.firstName }}</td>
-        <td>{{ patient.lastName }}</td>
-        <td>{{ patient.mothersName }}</td>
-        <td>{{ patient.birthDate | date : "mediumDate" }}</td>
-        <td>{{ patient.insulinPump }}</td>
-        <td>{{ patient.cgmSensor }}</td>
+      <tr
+        [pSelectableRow]="patient"
+        class="hover:bg-gray-800 transition duration-150 text-gray-200"
+      >
+        <td pSelectableRowCheckbox class="py-3 px-4"></td>
+        <td class="py-3 px-4">{{ patient.firstName }}</td>
+        <td class="py-3 px-4">{{ patient.lastName }}</td>
+        <td class="py-3 px-4">{{ patient.mothersName }}</td>
+        <td class="py-3 px-4">{{ patient.birthDate | date : "mediumDate" }}</td>
+        <td class="py-3 px-4">{{ patient.insulinPump }}</td>
+        <td class="py-3 px-4">{{ patient.cgmSensor }}</td>
       </tr>
     </ng-template>
 
@@ -43,29 +81,178 @@
     <ng-template pTemplate="footer">
       <tr>
         <td colspan="7">
-          <div class="flex justify-between items-center">
-            <span>Total Patients: {{ patients.length }}</span>
+          <div
+            class="flex justify-between items-center text-xs font-medium py-2 px-4 bg-gray-700 border-t border-gray-600"
+          >
+            <span>Displaying {{ patients.length }} patients on this page.</span>
+            <span>Total Patients: {{ totalCount }}</span>
           </div>
         </td>
       </tr>
     </ng-template>
   </p-table>
 
-  <!-- Selected Patient Info -->
-  <div *ngIf="selectedPatient" class="mt-4 p-4 border rounded-md bg-gray-800">
-    <h3 class="font-semibold">Selected Patient:</h3>
-    <p>
-      {{ selectedPatient.firstName }} {{ selectedPatient.lastName }} (Mother:
-      {{ selectedPatient.mothersName }})
-    </p>
-    <p>Birth Date: {{ selectedPatient.birthDate | date : "mediumDate" }}</p>
-    <p>Insulin Pump: {{ selectedPatient.insulinPump }}</p>
-    <p>CGM Sensor: {{ selectedPatient.cgmSensor }}</p>
-    <button
-      class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-semibold hover:bg-blue-700 transition"
-      (click)="gotodetails()"
+  <div
+    *ngIf="selectedPatient"
+    class="mt-6 p-6 rounded-xl bg-gray-800 border-2 border-blue-600 shadow-xl transition duration-300 hover:shadow-2xl"
+  >
+    <h3 class="font-bold text-xl text-blue-400 mb-4 flex items-center">
+      <i class="pi pi-user-plus mr-3 text-2xl"></i>
+      Selected Patient Summary:
+    </h3>
+    <div
+      class="grid grid-cols-1 md:grid-cols-3 gap-y-3 gap-x-6 text-sm text-gray-300"
     >
-      Go to detail
-    </button>
+      <p>
+        <strong>Name:</strong> {{ selectedPatient.firstName }}
+        {{ selectedPatient.lastName }}
+      </p>
+      <p><strong>Mother:</strong> {{ selectedPatient.mothersName }}</p>
+      <p>
+        <strong>Birth Date:</strong>
+        {{ selectedPatient.birthDate | date : "mediumDate" }}
+      </p>
+      <p><strong>Body Weight:</strong> {{ selectedPatient.bodyWeight }} kg</p>
+      <p><strong>Pump:</strong> {{ selectedPatient.insulinPump }}</p>
+      <p><strong>Sensor:</strong> {{ selectedPatient.cgmSensor }}</p>
+    </div>
+
+    <div class="mt-5 pt-3 border-t border-gray-700">
+      <p-button
+        class="text-sm font-semibold bg-blue-500 hover:bg-blue-600 text-white"
+        (click)="gotodetails()"
+        label="Go to Live Data View"
+        icon="pi pi-chart-line"
+        styleClass="p-button-rounded shadow-sm hover:shadow-md"
+      ></p-button>
+    </div>
   </div>
+
+  <p-dialog
+    [header]="patientDialogTitle"
+    [(visible)]="displayPatientDialog"
+    [modal]="true"
+    [style]="{ width: '50vw', maxWidth: '650px' }"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="rounded-xl shadow-2xl p-dialog-dark"
+  >
+    <div *ngIf="patientToEdit" class="p-fluid grid form-layout">
+      <div class="field col-12 md:col-6">
+        <label for="firstName">First Name</label>
+        <input
+          pInputText
+          id="firstName"
+          type="text"
+          [(ngModel)]="patientToEdit.firstName"
+          required
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="lastName">Last Name</label>
+        <input
+          pInputText
+          id="lastName"
+          type="text"
+          [(ngModel)]="patientToEdit.lastName"
+          required
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="mothersName">Mother's Name</label>
+        <input
+          pInputText
+          id="mothersName"
+          type="text"
+          [(ngModel)]="patientToEdit.mothersName"
+          required
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="birthDate">Birth Date</label>
+
+        <p-datepicker
+          id="birthDate"
+          [(ngModel)]="patientToEdit.birthDate"
+          [showIcon]="true"
+          dateFormat="yy/mm/dd"
+          inputStyleClass="w-full"
+        >
+        </p-datepicker>
+      </div>
+
+      <div class="field col-12 md:col-4">
+        <label for="bodyWeight">Weight (kg)</label>
+        <input
+          pInputText
+          id="bodyWeight"
+          type="number"
+          [(ngModel)]="patientToEdit.bodyWeight"
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+      <div class="field col-12 md:col-4">
+        <label for="insulinPump">Insulin Pump</label>
+        <input
+          pInputText
+          id="insulinPump"
+          type="text"
+          [(ngModel)]="patientToEdit.insulinPump"
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+      <div class="field col-12 md:col-4">
+        <label for="cgmSensor">CGM Sensor</label>
+        <input
+          pInputText
+          id="cgmSensor"
+          type="text"
+          [(ngModel)]="patientToEdit.cgmSensor"
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+
+      <div class="field col-12">
+        <label for="socketUrl">Live Monitoring Socket URL</label>
+        <input
+          pInputText
+          id="socketUrl"
+          type="text"
+          [(ngModel)]="patientToEdit.socketUrl"
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+
+      <div
+        class="field col-12 mt-2 text-xs text-gray-500 bg-gray-700 p-2 rounded"
+      >
+        Associated Doctor ID: {{ patientToEdit.doctorId }}
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="displayPatientDialog = false"
+        styleClass="p-button-text p-button-secondary-dark"
+      >
+      </p-button>
+      <p-button
+        [label]="patientToEdit!.id === 0 ? 'Create Patient' : 'Save Changes'"
+        icon="pi pi-check"
+        (click)="savePatient()"
+        styleClass="p-button-primary-dark"
+      >
+      </p-button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog styleClass="p-confirm-dialog-dark"></p-confirmDialog>
+
+  <p-toast></p-toast>
 </div>
