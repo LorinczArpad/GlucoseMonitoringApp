@@ -38,12 +38,14 @@ export class AuthService {
 
   public get token(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem('token');
+      let token = localStorage.getItem('token');
+      let res = LoginResponse.fromJS(JSON.parse(token ?? ''));
+      return res.token;
     } else {
       return null;
     }
   }
-  
+
   public get isLoggedIn(): boolean {
     return this.token !== null;
   }

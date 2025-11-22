@@ -14,6 +14,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { MessageService } from 'primeng/api';
+import { Toast } from "primeng/toast";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     ButtonModule,
     FormsModule,
-  ],
+    Toast
+],
   providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'], // Or use Tailwind directly in HTML

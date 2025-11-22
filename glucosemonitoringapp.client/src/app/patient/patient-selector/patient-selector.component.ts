@@ -1,4 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/authentication/auth.service';
+import {
+  PatientClient,
+  PatientDTO,
+} from '../../../services/httpClient/httpClient';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { Router } from '@angular/router';
 interface Patient {
   id: number;
   firstName: string;
@@ -11,17 +21,52 @@ interface Patient {
 
 @Component({
   selector: 'app-patient-selector',
-  standalone: false,
+  standalone: true,
   templateUrl: './patient-selector.component.html',
-  styleUrl: './patient-selector.component.css',
+  styleUrls: ['./patient-selector.component.css'], // corrected
+  imports: [
+    CommonModule,
+    ButtonModule, // for <p-button>
+    TableModule, // for <p-table>
+    PaginatorModule, // for pagination
+  ],
 })
-export class PatientSelectorComponent {
-  patients: Patient[] = [
-    { id: 1, firstName: 'John', lastName: 'Doe', mothersName: 'Jane Doe', birthDate: new Date(2005, 4, 12), insulinPump: 'Tandem', cgmSensor: 'Dexcom G6' },
-    { id: 2, firstName: 'Anna', lastName: 'Smith', mothersName: 'Mary Smith', birthDate: new Date(2010, 1, 23), insulinPump: 'Omnipod', cgmSensor: 'Freestyle Libre' },
-    { id: 3, firstName: 'Peter', lastName: 'Brown', mothersName: 'Susan Brown', birthDate: new Date(2008, 6, 5), insulinPump: 'Medtronic', cgmSensor: 'Guardian Sensor' }
-    // Add more mock patients here
-  ];
-  
-  selectedPatient: Patient | null = null;
+export class PatientSelectorComponent implements OnInit {
+  patients: PatientDTO[] = [];
+  selectedPatient: PatientDTO | null = null;
+
+  router = inject(Router);
+  authService = inject(AuthService);
+  patientClient = inject(PatientClient);
+  // Paging
+  pageNumber = 1;
+  pageSize = 10;
+  totalCount = 0;
+  ngOnInit(): void {
+    this.loadPatients();
+  }
+  loadPatients() {
+    const user = this.authService.CurretUser;
+    if (!user?.id) return;
+
+    this.patientClient
+      .getPatientsForDoctorPaged(user.id, this.pageNumber, this.pageSize)
+      .subscribe({
+        next: (res: any) => {
+          this.patients = res.items || res.patients || [];
+          this.totalCount = res.totalCount || this.patients.length;
+        },
+        error: (err) => {
+          console.error('Error loading patients', err);
+        },
+      });
+  }
+  gotodetails() {
+    this.router.navigate(['/patient-view', this.selectedPatient?.id]);
+  }
+  onPageChange(event: any) {
+    this.pageNumber = event.page + 1;
+    this.pageSize = event.rows;
+    this.loadPatients();
+  }
 }

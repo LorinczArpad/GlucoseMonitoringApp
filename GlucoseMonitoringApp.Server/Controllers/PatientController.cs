@@ -1,4 +1,5 @@
-﻿using Application.DTOs;
+﻿using Application.Common.Models;
+using Application.DTOs;
 using Application.Services.Patients;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -88,6 +89,16 @@ namespace GlucoseMonitoringApp.Server.Controllers
             {
                 return BadRequest("Unexpected error during patient update.");
             }
+        }
+        [HttpGet("DoctorPaged")]
+        [Authorize(Roles = "Superadmin,Doctor")]
+        public async Task<PageList<PatientDTO>> GetPatientsForDoctorPaged([FromQuery] int doctorId, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+         
+                var pagedPatients = await _patientService.GetPatientsForDoctorPaged(doctorId, pageNumber, pageSize);
+            
+                return pagedPatients;
+            
         }
     }
 }

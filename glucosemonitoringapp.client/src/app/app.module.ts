@@ -1,6 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,18 +25,16 @@ import { PatientSelectorComponent } from './patient/patient-selector/patient-sel
 import { JwtInterceptorService } from '../services/interceptors/jwt-interceptor.service';
 import { API_BASE_URL } from '../services/httpClient/httpClient';
 import { environment } from '../enviroments/enviroment';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 @NgModule({
-  declarations: [
-    AppComponent,
-    PatientSelectorComponent,
-    PatientViewComponent,
-
-  ],
+  declarations: [AppComponent],
   imports: [
-     BrowserAnimationsModule,
+    BrowserAnimationsModule,
     RouterModule,
     CommonModule,
     BrowserModule,
@@ -41,25 +42,28 @@ import { MessageService } from 'primeng/api';
     AppRoutingModule,
     TableModule,
     HeaderComponent,
-ToastModule
+    ToastModule,
   ],
   providers: [
-    MessageService, 
+    MessageService,
     provideAnimations(),
-        providePrimeNG({
-            theme: {
-                preset: Aura
-            }
-        }),
-           provideClientHydration(),
-        { 
-      provide: API_BASE_URL, useValue: environment.apiBaseUrl },
-      provideHttpClient(withInterceptorsFromDi()),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+      },
+    }),
+    provideClientHydration(),
+    {
+      provide: API_BASE_URL,
+      useValue: environment.apiBaseUrl,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptorService,
       multi: true,
-    },],
-  bootstrap: [AppComponent]
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

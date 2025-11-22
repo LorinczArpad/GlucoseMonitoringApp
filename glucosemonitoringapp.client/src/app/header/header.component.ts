@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isLoggedIn = false;
     }
-    console.log(user);
   }
   updateMenuItems() {
     this.menuItems = [
@@ -63,5 +62,7 @@ export class HeaderComponent implements OnInit {
   toggleLogin() {
     this.isLoggedIn = !this.isLoggedIn;
     this.authservice.logout();
+    this.user = undefined;
+    this.updateLogginState();
   }
 }

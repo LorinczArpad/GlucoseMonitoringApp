@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Application.Common.Models;
 using Application.DTOs;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Application.Services.Patients
 {
-    public interface IPatientService
-    {
-        Task AddPatient(PatientDTO patient);
-        Task<bool> UpdatePatient(PatientDTO patient);
-        Task DeletePatient(int patientId);
-        Task<PatientDTO> GetPatientById(int patientId);
-        Task<IEnumerable<PatientDTO>> GetAllPatients();
-        Task<IEnumerable<PatientDTO>> GetPatientsForDoctor(int doctorId);
-    }
+    
+        public interface IPatientService
+        {
+            Task<IEnumerable<PatientDTO>> GetPatientsForDoctor(int doctorId);
+            Task AddPatient(PatientDTO patient);
+            Task<bool> UpdatePatient(PatientDTO patient);
+            Task DeletePatient(int patientId);
+            Task<PatientDTO> GetPatientById(int patientId);
+            Task<IEnumerable<PatientDTO>> GetAllPatients();
+            Task<PageList<PatientDTO>> GetPatientsForDoctorPaged(int doctorId, int pageNumber, int pageSize);
+        }
+    
 
     public class PatientService : IPatientService
     {
@@ -85,6 +89,28 @@ namespace Application.Services.Patients
             }
 
             return false;
+        }
+   
+        public async Task<PageList<PatientDTO>> GetPatientsForDoctorPaged(int doctorId, int pageNumber, int pageSize)
+        {
+            if (pageNumber <= 0) pageNumber = 1;
+            if (pageSize <= 0) pageSize = 10;
+
+            var query = _dbContext.Patients
+                .Where(p => !p.Deleted && p.DoctorId == doctorId);
+
+            var totalCount = await query.CountAsync();
+
+            var patients = await query
+                .OrderBy(p => p.LastName)
+                .ThenBy(p => p.FirstName)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var dtoList = patients.Select(PatientDTO.MapToDTO);
+
+            return PageList<PatientDTO>.Create(dtoList, pageNumber, pageSize, totalCount);
         }
     }
 }
